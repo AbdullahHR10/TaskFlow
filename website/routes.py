@@ -4,6 +4,7 @@ from flask import flash, jsonify
 import smtplib
 from flask_login import login_required, current_user
 from .models.task import Task
+from .models.note import Note
 from website import db
 from datetime import datetime
 
@@ -35,13 +36,19 @@ def to_do_list():
     """ Returns to do list page. """
     return render_template('to_do_list.html')
 
+@routes.route('/notes')
+def notes():
+    """ Returns notes page. """
+    return render_template('notes.html')
+
+
 """ Home section. """
 
 
 @routes.route('/suggestions', methods=['GET', 'POST'])
 @login_required
 def suggestions():
-    """ Returns url for suggestions.html """
+    """ Returns suggestions page. """
     return render_template('suggestions.html')
 
 
@@ -65,6 +72,10 @@ def add_task():
             due_date = datetime.strptime(due_date_str, '%Y-%m-%dT%H:%M')
         except ValueError:
             flash('Invalid date format. Please use YYYY-MM-DDTHH:MM.', 'error')
+            return redirect(url_for('routes.to_do_list'))
+
+        if len(task_description) > 120:
+            flash('Task description must be 120 characters or less', 'error')
             return redirect(url_for('routes.to_do_list'))
     
         due_date = datetime.strptime(due_date_str, '%Y-%m-%dT%H:%M')
@@ -198,3 +209,59 @@ def delete_all_tasks():
     db.session.commit()
     flash('All tasks have been deleted successfully.', 'success')
     return redirect(url_for('routes.to_do_list'))
+
+""" Notes section. """
+
+
+@routes.route('/add-note', methods=['GET', 'POST'])
+@login_required
+def add_note():
+    """ Add a new note for the current user. """
+    notes = current_user.notes
+    title = request.form.get('title')
+    content = request.form.get('content')
+
+    if not title or not content:
+        flash('Title and content are required to add a note.', 'error')
+        return redirect(url_for('routes.notes'))
+
+    new_note = Note(title=title, content=content,
+                    user_id=current_user.get_id())
+    db.session.add(new_note)
+    db.session.commit()
+    flash('Note added successfully!', 'success')
+    return redirect(url_for('routes.notes'))
+
+@routes.route('/edit-note', methods=['POST'])
+def edit_note():
+    note_id = request.form.get('note_id')
+    note_title = request.form.get('title')
+    note_content = request.form.get('content')
+
+    note = Note.query.get(note_id)
+
+    if note:
+        note.title = note_title
+        note.content = note_content
+        db.session.commit()
+        flash('Note updated successfully!', 'success')
+    else:
+        flash('Note not found.', 'error')
+
+    return redirect(url_for('routes.notes')) 
+
+@routes.route('/delete-note', methods=['POST'])
+@login_required
+def delete_note():
+    """ Delete a note for the current user. """
+    note_id = request.form.get('note_id')
+    note = Note.query.get(note_id)
+
+    if not note or note.user_id != current_user.get_id():
+        flash('Note not found or unauthorized.', 'error')
+        return redirect(url_for('routes.notes'))
+
+    db.session.delete(note)
+    db.session.commit()
+    flash('Note deleted successfully!', 'success')
+    return redirect(url_for('routes.notes'))
