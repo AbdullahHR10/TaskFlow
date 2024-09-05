@@ -4,6 +4,7 @@ from flask import flash, jsonify
 import smtplib
 from flask_login import login_required, current_user
 from .models.task import Task
+from .models.habit import Habit
 from .models.note import Note
 from website import db
 from datetime import datetime
@@ -36,21 +37,22 @@ def to_do_list():
     """ Returns to do list page. """
     return render_template('to_do_list.html')
 
+@routes.route('/habit_tracker')
+@login_required
+def habit_tracker():
+    """ Returns habit tracker page. """
+    return render_template('habit_tracker.html')
+
+@routes.route('/budget_tracker', methods=['GET', 'POST'])
+@login_required
+def budget_tracker():
+    """ Returns budget tracker page. """
+    return render_template('budget_tracker.html') 
+
 @routes.route('/notes')
 def notes():
     """ Returns notes page. """
     return render_template('notes.html')
-
-
-""" Home section. """
-
-
-@routes.route('/suggestions', methods=['GET', 'POST'])
-@login_required
-def suggestions():
-    """ Returns suggestions page. """
-    return render_template('suggestions.html')
-
 
 """ Tasks list section. """
 
@@ -58,7 +60,7 @@ def suggestions():
 @routes.route('/add-task', methods=['GET', 'POST'])
 @login_required
 def add_task():
-    """ Adds a task in tasks list """
+    """ Adds a task in tasks list. """
     if request.method == 'POST':
         task_title = request.form.get('task_title')
         task_description = request.form.get('task_description')
@@ -71,11 +73,13 @@ def add_task():
         try:
             due_date = datetime.strptime(due_date_str, '%Y-%m-%dT%H:%M')
         except ValueError:
-            flash('Invalid date format. Please use YYYY-MM-DDTHH:MM.', 'error')
+            flash('Invalid date format. Please use YYYY-MM-DDTHH:MM.',
+                  'error')
             return redirect(url_for('routes.to_do_list'))
 
         if len(task_description) > 120:
-            flash('Task description must be 120 characters or less', 'error')
+            flash('Task description must be 120 characters or less',
+                  'error')
             return redirect(url_for('routes.to_do_list'))
     
         due_date = datetime.strptime(due_date_str, '%Y-%m-%dT%H:%M')
@@ -210,6 +214,86 @@ def delete_all_tasks():
     flash('All tasks have been deleted successfully.', 'success')
     return redirect(url_for('routes.to_do_list'))
 
+""" Habit tracker section. """
+
+
+@routes.route('/add-habit', methods=['GET', 'POST'])
+@login_required
+def add_habit():
+    """ Adds a habit in tasks list. """
+    if request.method == 'POST':
+        habit_name = request.form.get('habit_name')
+        habit_category = request.form.get('habit_category')
+        habit_description = request.form.get('habit_description')
+        habit_frequency = request.form.get('habit_frequency')
+
+        if not habit_name or not habit_category or not habit_description \
+            or not habit_frequency:
+            flash('All fields are required.', 'error')
+            return redirect(url_for('routes.habit_tracker'))
+
+        if len(habit_description) > 120:
+            flash('Task description must be 120 characters or less',
+                  'error')
+            return redirect(url_for('routes.habit_tracker'))
+
+        habit = Habit(name=habit_name,
+                      category=habit_category,
+                      description=habit_description,
+                      frequency=habit_frequency,
+                      user_id=current_user.id
+                      )
+
+        db.session.add(habit)
+        db.session.commit()
+        flash('Habit added successfully!', 'success')
+        return redirect(url_for('routes.habit_tracker'))
+
+    return render_template('habit_tracker.html')
+
+@routes.route('/edit-habit', methods=['GET', 'POST'])
+@login_required
+def edit_habit():
+    """ Edits a habit from the habit tracker. """
+    habit_id = request.form.get('habit_id')
+    habit = Habit.query.filter_by(id=habit_id, user_id=current_user.id).first()
+
+    if not habit:
+        flash("Habit not found.", "error")
+        return redirect(url_for('routes.habit_tracker'))
+
+    if request.method == 'POST':
+        habit.name = request.form.get('habit_name')
+        habit.category = request.form.get('habit_category')
+        habit.description = request.form.get('habit_description')
+        habit.frequency = request.form.get('habit_frequency')
+
+        db.session.commit()
+        flash("Habit updated successfully!", "success")
+        return redirect(url_for('routes.habit_tracker'))
+
+    return render_template('edit_habit.html', habit=habit)
+
+
+@routes.route('/delete-habit', methods=['POST'])
+@login_required
+def delete_habit():
+    """ Deletes a habit from the habit tracker. """
+    habit_id = request.form.get('habit_id')
+    habit = Habit.query.get(habit_id)
+
+    if not habit or habit.user_id != current_user.id:
+        flash('Habit not found or unauthorized.', 'error')
+        return redirect(url_for('routes.habit_tracker'))
+
+    db.session.delete(habit)
+    db.session.commit()
+    flash('Habit deleted successfully!', 'success')
+    return redirect(url_for('routes.habit_tracker'))
+
+""" Budget section. """
+
+
 """ Notes section. """
 
 
@@ -232,7 +316,7 @@ def add_note():
     flash('Note added successfully!', 'success')
     return redirect(url_for('routes.notes'))
 
-@routes.route('/edit-note', methods=['POST'])
+@routes.route('/edit-note', methods=['GET', 'POST'])
 def edit_note():
     note_id = request.form.get('note_id')
     note_title = request.form.get('title')
