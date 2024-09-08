@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
+    balance = db.Column(db.Float, nullable=False, default=0.0)
     tasks = db.relationship('Task')
     habits = db.relationship('Habit')
     budget = db.relationship('Budget')
