@@ -5,6 +5,7 @@ import smtplib
 from flask_login import login_required, current_user
 from .models.task import Task
 from .models.habit import Habit
+from .models.budget import Budget
 from .models.note import Note
 from website import db
 from datetime import datetime
@@ -346,6 +347,69 @@ def reset_habit_streak():
 
 
 """ Budget section. """
+
+
+@routes.route('/add_budget', methods=['GET', 'POST'])
+@login_required
+def add_budget():
+    """ Updates the user's balance and adds transactions to their budget. """
+    user = current_user
+
+    if request.method == 'POST':
+        item = request.form.get('item')
+        gained = request.form.get('gained')
+        spent = request.form.get('spent')
+        is_purchase = request.form.get('is_purchase')
+        is_sale = request.form.get('is_sale')
+
+        gained = float(gained) if gained else 0.0
+        spent = float(spent) if spent else 0.0
+
+        user.balance += (gained - spent)
+        db.session.commit()
+
+        new_transaction = Budget(
+            transactions={
+                          'item': item,
+                          'gained': gained,
+                          'spent': spent,
+                          'is_sale': is_sale,
+                          'is_purchase': is_purchase},
+            user_id=user.id
+        )
+        db.session.add(new_transaction)
+        db.session.commit()
+        print(request.form)
+
+        flash('Budget updated successfully!', 'success')
+        return redirect(url_for('routes.budget_tracker'))
+    else:
+        flash('Please fill in both gained and spent amounts.', 'danger')
+
+    return redirect(url_for('routes.budget_tracker'))
+
+
+@routes.route('/update_balance', methods=['POST'])
+def update_balance():
+    new_balance = request.form.get('new_balance')
+    user = current_user
+    user.balance = float(new_balance)
+    db.session.commit()
+    return redirect(url_for('routes.budget_tracker'))
+
+
+@routes.route('/delete_transaction/<transaction_id>', methods=['GET', 'POST'])
+@login_required
+def delete_transaction(transaction_id):
+    """ Deletes a transaction from the user's budget. """
+    transaction = Budget.query.get(transaction_id)
+    if transaction and transaction.user_id == current_user.id:
+        db.session.delete(transaction)
+        db.session.commit()
+        flash('Transaction deleted successfully!', 'success')
+    else:
+        flash('Transaction not found', 'danger')
+    return redirect(url_for('routes.budget_tracker'))
 
 
 """ Notes section. """
