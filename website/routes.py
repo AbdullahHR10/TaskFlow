@@ -359,33 +359,40 @@ def add_budget():
         item = request.form.get('item')
         gained = request.form.get('gained')
         spent = request.form.get('spent')
-        is_purchase = request.form.get('is_purchase')
-        is_sale = request.form.get('is_sale')
+        is_purchase = bool(request.form.get('is_purchase'))
+        is_sale = bool(request.form.get('is_sale'))
 
-        gained = float(gained) if gained else 0.0
-        spent = float(spent) if spent else 0.0
+        try:
+            gained = float(gained) if gained else 0.0
+            spent = float(spent) if spent else 0.0
+        except ValueError:
+            flash('Invalid amount values provided.', 'danger')
+            return redirect(url_for('routes.budget_tracker'))
+
+        if gained == 0 and spent == 0:
+            flash('Please fill in either gained or spent amount.', 'danger')
+            return redirect(url_for('routes.budget_tracker'))
 
         user.balance += (gained - spent)
         db.session.commit()
 
         new_transaction = Budget(
             transactions={
-                          'item': item,
-                          'gained': gained,
-                          'spent': spent,
-                          'is_sale': is_sale,
-                          'is_purchase': is_purchase},
+                'item': item,
+                'gained': gained,
+                'spent': spent,
+                'is_sale': is_sale,
+                'is_purchase': is_purchase
+            },
             user_id=user.id
         )
         db.session.add(new_transaction)
         db.session.commit()
-        print(request.form)
 
         flash('Budget updated successfully!', 'success')
         return redirect(url_for('routes.budget_tracker'))
-    else:
-        flash('Please fill in both gained and spent amounts.', 'danger')
 
+    flash('Please fill in both gained and spent amounts.', 'danger')
     return redirect(url_for('routes.budget_tracker'))
 
 
