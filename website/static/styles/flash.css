@@ -1,0 +1,51 @@
+.flash-messages {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 300px;
+    z-index: 1000;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 5s;
+}
+.alert.success {
+    background-color: #4CAF50;
+}
+.alert.error {
+    background-color: #f44336;
+}
+.alert.warning {
+    background-color: #ff9800;
+}
+.alert.info {
+    background-color: #2196F3;
+}
+.alert.login-required {
+    background-color: #ff4d4d;
+}
+.closebtn {
+    margin-left: 1rem;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.closebtn:hover {
+    color: black;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
