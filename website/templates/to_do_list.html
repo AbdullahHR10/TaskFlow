@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}TaskFlow - To Do List{% endblock %}
+{% block content %}
+<section class="ToDoList-container">
+    <div class="ToDoList-header">
+        <h1>To Do List</h1>
+        <h6>Completed tasks: 
+            {% set completed_tasks = current_user.tasks | selectattr('status', 'equalto', 'completed') | list | length %}
+            {% set total_tasks = current_user.tasks | length %}
+            {{ completed_tasks }} out of {{ total_tasks }}
+        </h6>
+        <div class="progress-container">
+            <div class="circular-progress" data-completed="{{ completed_tasks }}" data-total="{{ total_tasks }}">
+                {% set completed_tasks = current_user.tasks | selectattr('status', 'equalto', 'completed') | list | length %}
+                {% set total_tasks = current_user.tasks | length %}
+                {% if total_tasks > 0 %}
+                    {% set percentage = (completed_tasks / total_tasks) * 100 %}
+                {% else %}
+                    {% set percentage = 0 %}
+                {% endif %}
+                <div class="value-container">{{ percentage | round(2) }}%</div>
+            </div>
+        </div>
+    </div>
+    <section class="section-dashboard">
+        <a id="AddTask"><img src="{{ url_for('static', filename='icons/plus.png') }}">Add Task</a>
+        <a href="{{ url_for('routes.delete_all_tasks') }}" id="DeleteAllTasks" ><img src="{{ url_for('static', filename='icons/delete.png') }}">Delete all tasks</a>
+        <a href="{{ url_for('routes.delete_completed_tasks') }}" id="DeleteCompletedTasks"><img src="{{ url_for('static', filename='icons/check.png') }}">Delete completed tasks</a>
+        <a href="{{ url_for('routes.mark_tasks_complete') }}" id="CompleteAllTasks"><img src="{{ url_for('static', filename='icons/mark.png') }}">Mark all complete</a>
+    </section>
+    <section class="TasksList">
+        <ul>
+            {% set tasks = current_user.tasks|sort(attribute='status', reverse=True) %}
+            {% for task in tasks %}
+                <li class="task-container {{ 'completed' if task.status == 'completed' else 'pending' }}">
+                    <form method="POST" action="{{ url_for('routes.toggle_task_status') }}" id="Completebtn">
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        {% if task.status == 'completed' %}
+                            <button type="submit" class="UnCompletebtn"></button>
+                        {% else %}
+                            <button type="submit" class="Completebtn"></button>
+                        {% endif %}
+                    </form>                    
+                    <div id="tasktitle-description">
+                        <h1 class="task-title">{{ task.title }}</h1>
+                        <h3 class="task-description">{{ task.description }}</h3>
+                    </div>
+                    <h6 class="task-due-date">Due: {{ task.due_date.strftime('%Y-%m-%d') }} {{ task.due_date.strftime('%I:%M %p') }}</h6>
+                    <button 
+                    type="button" 
+                    class="edit-btn"
+                    id="EditTaskbtn"
+                    data-task-id="{{ task.id }}"
+                    data-task-title="{{ task.title }}"
+                    data-task-description="{{ task.description }}"
+                    data-task-due="{{ task.due_date.strftime('%Y-%m-%dT%H:%M') }}"
+                    onclick="showEditPopup(this)"
+                    >
+                    <img src="{{ url_for('static', filename='icons/edit.png') }}" alt="Edit Task">
+                </button>                 
+                    <form action="{{ url_for('routes.delete_task') }}" method="post" id="Deletetask">
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit" id="DeleteTaskbtn">
+                            <img src="{{ url_for('static', filename='icons/delete.png') }}" alt="Delete Task">
+                        </button>
+                    </form>
+                </li>
+            {% else %}
+            <h1 class="no-tasks">No tasks found.</h1>
+            {% endfor %}
+        </ul>
+    </section>
+</section>
+<div id="taskPopup" class="popup">
+    <div class="popup-content">
+        <span id="closePopup" class="close">&times;</span>
+        <h2>Add New Task</h2>
+        <form id="addTaskForm" action="/add-task" method="POST">
+            <label for="task_title">Title:</label>
+            <input type="text" id="task_title" name="task_title" required placeholder="Workout">
+            <label for="task_description">Description:</label>
+            <textarea id="task_description" name="task_description" required placeholder="Going to the gym, doing push day"></textarea>
+            <label for="due_datetime">Due Date and Time:</label>
+            <input type="datetime-local" id="due_datetime" name="due_datetime">
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+</div>
+<div id="editTaskPopup" class="popup">
+    <div class="popup-content">
+        <span id="closeEditTaskPopup" class="close">&times;</span>
+        <h2>Edit Task</h2>
+        <form id="editTaskForm" action="{{ url_for('routes.edit_task') }}" method="POST">
+            <input type="hidden" id="edit_task_id" name="task_id">
+            <label for="edit_title">Title:</label>
+            <input type="text" id="edit_title" name="title" required>
+            <label for="edit_description">Description:</label>
+            <textarea id="edit_description" name="description" required></textarea>
+            <label for="edit_due_datetime">Due Date and Time:</label>
+            <input type="datetime-local" id="edit_due_datetime" name="due_datetime">
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/to_do_list.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/circular_bar.js') }}"></script>
+{% endblock %}
+
+{% endblock %}
