@@ -1,0 +1,216 @@
+.HabitTracker-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.HabitTracker-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 9rem;
+}
+.HabitTracker-header h1 {
+    font-size: 2rem;
+    margin-left: 3rem;
+}
+#AddHabit {
+    font-size: 1.3rem;
+    margin: 0 0 0 2rem;
+    color: #0061cf;
+}
+#AddHabit img {
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#AddHabit:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.HabitsList {
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+    margin-top: 2rem;
+    width: 90%;
+    align-self: center;
+}
+.HabitsList ul {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 3rem;
+    list-style: none;
+    margin-top: 3rem;
+    color: white;
+    align-self: center;
+}
+.habit-item {
+    width: 25rem;
+    padding: 1.5rem;
+    background-color: #080b23;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.habit-name {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+.catedesp{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5rem 0 0 1rem;
+}
+.catedesp span {
+    color: #0061cf;
+    margin-right: 0.3rem;
+}
+#DeleteHabitBtn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background: none;
+    border: none;
+}
+#EditHabitBtn {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    background: none;
+    border: none;
+}
+.habit-category, .habit-frequency {
+    font-size: 0.8rem;
+}
+.habit-description {
+    font-size: 0.8rem;
+    margin: 0.5rem 0 0 1rem;
+    white-space: pre-line;
+}
+.strebtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.habit-streak {
+    font-size: 1rem;
+    text-align: left;
+}
+.reset-streak {
+    border: none;
+    background: none;
+    color: red;
+    position: absolute;
+    bottom: 1rem;
+    left: 1.5rem;
+}
+.reset-streak:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.complete-habit {
+    background-color: #0061cf;
+    border: none;
+    width: 10rem;
+    height: 3rem;
+    align-self: center;
+    border-radius: 25px;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 0 5px #0061cf;
+}
+.complete-habit:hover {
+    background-color: #00abff;
+    cursor: pointer;
+    box-shadow: none;
+}
+.startdate {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+}
+.HabitsList::-webkit-scrollbar {
+    width: 10px;
+}
+.HabitsList::-webkit-scrollbar-thumb {
+    background-color: #0061cf;
+    border-radius: 6px;
+}
+.HabitsList::-webkit-scrollbar-thumb:hover {
+    background: #00abff;
+}
+#EditHabitBtn:hover, #DeleteHabitBtn:hover {
+    cursor: pointer;
+}
+#addHabitForm, #editHabitForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#addHabitForm input, #editHabitForm input, #addHabitForm textarea, #editHabitForm textarea {
+    font-size: 1rem;
+    width: 80%;
+    padding-left: 0.5rem;
+}
+#addHabitForm textarea, #editHabitForm textarea {
+    height: 5rem;
+}
+#addHabitForm label, #editHabitForm label {
+    width: 100%;
+    align-self: left;
+    margin: 1rem 0 1rem 3rem;
+}
+#addHabitForm button, #editHabitForm button {
+    background-color: #0061cf;
+    border: none;
+    width: 30%;
+    height: 4rem;
+    align-self: center;
+    border-radius: 25px;
+    margin-top: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 0 5px #0061cf;
+}
+#addHabitForm button:hover, #editHabitForm button:hover {
+    background-color: #00abff;
+    cursor: pointer;
+    box-shadow: none;
+}
+.no-habits {
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 3rem;
+}
+.popup-add-habit, .popup-edit-habit {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    z-index: 1000;
+}
+.popup-add-habit h2, .popup-edit-habit h2 {
+    margin: 1rem 0 0 1rem;
+}
+.popup-content-edit-habit, .popup-content-add-habit {
+    background-color: #080b23;
+    width: 40rem;
+    height: 35rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
