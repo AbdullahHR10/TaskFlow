@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}TaskFlow - Budget Tracker{% endblock %}
+{% block content %}
+
+<section class="BudgetTracker-container">
+    <div class="BudgetTracker-header">
+        <h1>Budget Tracker</h1>
+        <div class="balance-container">
+            <h6>Current balance:</h6>
+            <h3>{{ current_user.balance }}$<button id="edit-balance"><img src="{{ url_for('static', filename='icons/edit.png') }}"></button></h3>
+        </div>
+    </div>
+    <section class="section-dashboard">
+        <a id="addTransactionButton" class="btn"><img src="{{ url_for('static', filename='icons/plus.png') }}">Add Transaction</a>
+    </section>
+    <section class="BudgetList">
+        {% if current_user.budget %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item name</th>
+                        <th>Amount Spent</th>
+                        <th>Amount Gained</th>
+                        <th>Transaction Type</th>
+                        <th>Created At</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in current_user.budget | reverse %}
+                        <tr>
+                            <td>{{ transaction.transactions.item }}</td>
+                            <td>{{ transaction.transactions.spent if transaction.transactions.spent is defined else 'N/A' }}</td>
+                            <td>{{ transaction.transactions.gained if transaction.transactions.gained is defined else 'N/A' }}</td>
+                            <td>
+                                {% if transaction.transactions.is_sale %}
+                                    Sale
+                                {% elif transaction.transactions.is_purchase %}
+                                    Purchase
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>{{ transaction.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>
+                                <form action="{{ url_for('routes.delete_transaction', transaction_id=transaction.id) }}" method="post">
+                                    <button type="submit" class="delete-budget"><img src="{{ url_for('static', filename='icons/delete.png') }}"></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% if not current_user.budget %}
+                    <h1 class="no-transactions">No transactions found.</h1>
+                    {% endif %}
+                </tbody>
+            </table>
+        {% endif %}
+    </section>
+</section>
+<div id="addTransactionPopup" class="popup-add-budget">
+    <div class="popup-content-add-budget">
+        <span class="close">&times;</span>
+        <h2>Add Transaction</h2>
+        <form id="transactionForm" method="POST" action="{{ url_for('routes.add_budget') }}">
+            <label for="item">Item name:</label>
+            <input type="text" id="item" name="item" step="0.01">
+
+            <label for="spent">Amount Spent:</label>
+            <input type="number" id="spent" name="spent" step="0.01">
+
+            <label for="gained">Amount Gained:</label>
+            <input type="number" id="gained" name="gained" step="0.01">
+
+            <div class="checkboxes">
+                <label for="is_purchase">Purchase:</label>
+                <input type="checkbox" id="is_purchase" name="is_purchase">
+                
+                <label for="is_sale">Sale:</label>
+                <input type="checkbox" id="is_sale" name="is_sale">
+            </div>
+            <button type="submit">Submit</button>
+        </form>         
+    </div>
+</div>
+<!-- Edit Balance Form (Initially Hidden) -->
+<div id="editBalancePopup" class="popup-edit-balance" style="display: none;">
+    <div class="popup-content-edit-balance">
+        <span class="close-edit">&times;</span>
+        <h2>Edit Balance</h2>
+        <form id="editBalanceForm" method="POST" action="{{ url_for('routes.update_balance') }}">
+            <label for="new_balance">New Balance:</label>
+            <input type="number" id="new_balance" name="new_balance" step="0.01" required>
+            <button type="submit">Update Balance</button>
+        </form>
+    </div>
+</div>
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/budget_tracker.js') }}"></script>
+{% endblock %}
+{% endblock %}
