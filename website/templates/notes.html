@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}TaskFlow - Notes{% endblock %}
+{% block content %}
+<section class="Notes-container">
+    <div class="Notes-header">
+        <h1>Notes</h1>
+    </div>
+    <section class="section-dashboard">
+        <a id="AddNote"><img src="{{ url_for('static', filename='icons/plus.png') }}">Add Note</a>
+    </section>
+    <section class="NotesList">
+        <ul>
+            {% for note in current_user.notes %}
+                <li class="note-item">
+                    <h1>{{ note.title }}</h1>
+                    <p>{{ note.content }}</p>
+                    <div class="Notes-inner-dashboard">
+                        <button id="EditNoteBtn" onclick="showEditNotePopup(this)"
+                            data-note-id="{{ note.id }}"
+                            data-note-title="{{ note.title }}"
+                            data-note-content="{{ note.content }}">
+                            <img src="../static/icons/edit.png">
+                        </button>
+                        <form action="{{ url_for('routes.delete_note') }}" method="POST" class="delete-note-form">
+                            <input type="hidden" name="note_id" value="{{ note.id }}">
+                            <button type="submit" id="DeleteNoteBtn">
+                                <img src="../static/icons/delete.png" alt="Delete Note">
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            {% else %}
+                <h1 class="no-notes">No notes found.</h1>
+            {% endfor %}
+        </ul>
+    </section>
+</section>
+<div id="notePopup" class="popup">
+    <div class="popup-content">
+        <span id="closeNotePopup" class="close">&times;</span>
+        <h2>Add New Note</h2>
+        <form id="addNoteForm" action="/add-note" method="POST">
+            <label for="note_title">Title:</label>
+            <input type="text" id="note_title" name="title" required placeholder="Note Title">
+            <label for="note_content">Content:</label>
+            <textarea id="note_content" name="content" required placeholder="Note Content"></textarea>
+            <button type="submit">Add Note</button>
+        </form>
+    </div>
+</div>
+
+<div id="editNotePopup" class="popup">
+    <div class="popup-content">
+        <span id="closeEditNotePopup" class="close">&times;</span>
+        <h2>Edit Note</h2>
+        <form id="editNoteForm" action="/edit-note" method="POST">
+            <input type="hidden" id="edit_note_id" name="note_id">
+            <label for="edit_note_title">Title:</label>
+            <input type="text" id="edit_note_title" name="title" required placeholder="Note Title">
+            <label for="edit_note_content">Content:</label>
+            <textarea id="edit_note_content" name="content" required placeholder="Note Content"></textarea>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/notes.js') }}"></script>
+{% endblock %}
+{% endblock %}
