@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}TaskFlow - Home{% endblock %}
+{% block content %}
+
+<section class="home-section">
+    <div class="welcome-back">
+        <h1>Welcome back, <span>{{ current_user.username }}</span></h1>
+    </div>
+    <div class="home-demo-container">
+        <iframe width="960" height="540" 
+            src="https://www.youtube.com/embed/_54sPXuVyeo" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+</section>
+{% endblock %}
