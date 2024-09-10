@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/flash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='icons/TaskFlow_logo.png') }}" type="image/x-icon">
+</head>   
+</head>
+<body>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <section class="login">
+        <section class="login-container">
+            <h1>Login</h1>
+        <form method="POST" action="{{ url_for('auth.login') }}">
+            <h3>Username</h3>
+            <input type="text" name="username" id="username" placeholder="Enter your username" required>
+            <h3>Password</h3>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            <button type="submit">Submit</button>
+            <h4>Don't have an account?</h4>
+            <a href="{{ url_for('auth.sign_up') }}">Sign up</a>
+        </form>
+        </section>
+    </section>
+    <script src="{{ url_for('static', filename='scripts/flash.js') }}"></script>
+</body>
+</html>
