@@ -1,0 +1,216 @@
+.ToDoList-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.ToDoList-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.ToDoList-header h1 {
+    font-size: 2rem;
+    margin-left: 3rem;
+}
+.ToDoList-header h6 {
+    font-size: 1rem;
+    margin: 0 2rem 0 auto;
+}
+.progress-container {
+    margin: 1rem 2rem 1rem 0;
+}
+.circular-progress {
+    position: relative;
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circular-progress:before {
+    content: "";
+    height: 84%;
+    width: 84%;
+    background-color: #080b23;
+    border-radius: 50%;
+}
+.value-container {
+    position: absolute;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+}
+.section-dashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.section-dashboard a {
+    text-decoration: none;
+}
+#AddTask {
+    font-size: 1.3rem;
+    margin: 0 0 0 2rem;
+    color: #0061cf;
+}
+#AddTask img {
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#DeleteAllTasks {
+    margin: 0 2rem 0 auto;
+    color: red;
+}
+#DeleteCompletedTasks {
+    margin: 0 2rem 0 0;
+    color: #FFC300;
+}
+#CompleteAllTasks {
+    margin: 0 2rem 0 0;
+    color: lime;
+}
+#DeleteAllTasks img, #CompleteAllTasks img, #DeleteCompletedTasks img {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+#AddTask:hover, #CompleteAllTasks:hover, #DeleteCompletedTasks:hover, #DeleteAllTasks:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.TasksList {
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+    width: 80%;
+    align-self: center;
+    margin-top: 2rem;
+}
+.TasksList ul {
+    display: flex;
+    flex-direction: column;
+}
+.TasksList::-webkit-scrollbar {
+    width: 10px;
+}
+.TasksList::-webkit-scrollbar-thumb {
+    background-color: #0061cf;
+    border-radius: 6px;
+}
+.TasksList::-webkit-scrollbar-thumb:hover {
+    background: #00abff;
+}
+.task-container {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 0.5rem 1rem 0rem 0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 6.5vh;
+}
+.task-container.completed {
+    border: 1px solid #28a745;
+}
+.task-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    color: white;  
+}
+.task-description {
+    font-size: 0.8rem;
+    margin: 0.1rem 0 0 2rem;
+    color: white;
+    opacity: 50%;
+}
+.task-due-date {
+    font-size: 0.8rem;
+    color: white;
+    margin-left: auto;
+}
+#tasktitle-description {
+    display: flex;
+    flex-direction: column;
+}
+#Deletetask {
+    vertical-align: middle;
+    margin-left: 1rem;
+}
+#DeleteTaskbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+#EditTaskbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 3rem;
+}
+#Completebtn {
+    margin: 0 2rem 0 0;
+    background-color: white;
+    border-radius: 50px;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Completebtn, .UnCompletebtn {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50px;
+    border: none;
+}
+.UnCompletebtn {
+    background-color: #28a745;
+}
+.Completebtn:hover {
+    cursor: pointer;
+}
+.no-tasks {
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 3rem;
+}
+#addTaskForm, #editTaskForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.popup-content h2 {
+    margin: 1rem 0 0 1rem;
+}
+#addTaskForm input, #editTaskForm input, #addTaskForm textarea, #editTaskForm textarea {
+    font-size: 1rem;
+    width: 80%;
+    padding-left: 0.5rem;
+}
+#addTaskForm textarea, #editTaskForm textarea  {
+    height: 5rem;
+}
+#addTaskForm label, #editTaskForm label {
+    width: 100%;
+    align-self: left;
+    margin: 1rem 0 1rem 3rem;
+}
+#addTaskForm button, #editTaskForm button {
+    background-color: #0061cf;
+    border: none;
+    width: 30%;
+    height: 4rem;
+    align-self: center;
+    border-radius: 25px;
+    margin-top: 2rem;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 0 5px #0061cf;
+}
+#addTaskForm button:hover, #editTaskForm button:hover {
+    background-color: #00abff;
+    cursor: pointer;
+    box-shadow: none;
+}
