@@ -1,0 +1,321 @@
+body {
+    margin-top: 8vh;
+    background-color: #03040e;
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+}
+html {
+    scroll-behavior: smooth
+}
+.nav_bar {
+    position: fixed;
+    top: 0;
+    background-color: #080b23;
+    border-bottom: 1px solid darkgray;
+    z-index: 1000;
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.nav_bar img {
+    height: 64px;
+    width: 64px;
+}
+#Logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10rem;
+    color: #0061cf;
+}
+.nav_bar a {
+    margin-right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.3rem;
+}
+.nav_bar a:hover {
+    color: #0061cf;
+    transition: 0.5s;
+}
+#loginbtn {
+    margin-left: auto;
+}
+#signupbtn, #logoutbtn {
+    margin-right: 10rem;
+    height: 50%;
+    width: 7rem;
+    color: white;
+    background-color: #0061cf;
+    border-radius: 10px;
+}
+#logoutbtn {
+    margin-left: auto;
+}
+#signupbtn:hover, #logoutbtn:hover {
+    background-color: #8695e2;
+}
+.description {
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+.description h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+.description h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.description span {
+    color: #0061cf;
+}
+.btncontainer {
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+}
+.btncontainer .button {
+    height: 2.5rem;
+    width: 9rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background-color: #8695e2;
+    text-decoration: none;
+}
+.btncontainer .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btncontainer .button:hover {
+    cursor: pointer;
+    background-color: #d3d3d3;
+    transition: 1s;
+}
+#GetStarted {
+    background-color: #0061cf;
+}
+#GetStarted:hover {
+    background-color: #d3d3d3;
+}
+.features {
+    color: white;
+    display: flex;
+    align-items: center;
+}
+#FeaturesTitle {
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+    padding-top: 15rem;
+    margin: 0 0 10rem 0;
+    letter-spacing: 0.5rem;
+    font-weight: 1000;
+    font-family: 'Montserrat', sans-serif;
+}
+.ToDoList-info, .Habits-info, .Budget-info, .Notes-info {
+    display: flex;
+    flex-direction: row;
+}
+.ToDoList-description, .Habits-description, .Budget-description, .Notes-description {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5rem 0 15rem;
+    align-items: center;
+    text-align: center;
+    width: auto;
+}
+.Habits-description, .Notes-description {
+    margin: 0 15rem 0 5rem;
+}
+.ToDoList-description h3, .Habits-description h3, .Budget-description h3, .Notes-description h3 {
+    font-size: 1.7rem;
+}
+.ToDoList-description p, .Habits-description p, .Budget-description p, .Notes-description p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+.ToDoList-description img, .Budget-description img {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+.Habits-description img, .Notes-description img  {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+.ToDoList-info .imgcontainer, .Budget-info .imgcontainer {
+    border: 1rem solid #080b23;
+    padding: 2rem;
+    margin: 0 15rem 5rem 0;
+}
+.Habits-info .imgcontainer, .Notes-info .imgcontainer {
+    border: 1rem solid #080b23;
+    padding: 2rem;
+    margin: 0 0 5rem 15rem;
+}
+.About {
+    display: flex;
+    flex-direction: column;
+}
+.Project-info {
+    background-color: #4F5D75;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+#About-Title {
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+    padding-top: 15rem;
+    margin: 0 0 10rem 0;
+    letter-spacing: 0.5rem;
+    font-weight: 1000;
+    font-family: 'Montserrat', sans-serif;
+}
+.Project-info h1 {
+    font-size: 3.5rem;
+    margin: 2rem 0 1rem 0;
+    color: #8695e2;
+    letter-spacing: 0.5rem;
+    font-weight: 1000;
+    font-family: 'Montserrat', sans-serif;
+}
+.Project-info p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    width: 45%;
+    margin-bottom: 2rem;
+}
+.source-code a {
+    color: #d3d3d3;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: 1000;
+}
+.source-code a:hover {
+    text-decoration: underline;
+}
+.Team-info {
+    background-color: #4F5D75;
+    text-align: center;
+}
+.Team-info h1 {
+    font-size: 3.5rem;
+    margin-top: 5rem;
+    color: #8695e2;
+    letter-spacing: 0.5rem;
+    font-weight: 1000;
+    font-family: 'Montserrat', sans-serif;
+}
+.Team-info h3 {
+    font-size: 3rem;
+    margin: 2rem 0 2rem 0;
+}
+.Team-info p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    width: 45%;
+    margin: 0 auto 1rem auto;
+}
+.socials {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    margin: 0 auto 0 auto;
+}
+.socials a {
+    color: #8695e2;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 2rem;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    border: 2px solid white;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: 0.2s;
+    margin: 1rem 0 1rem 0;
+    margin-bottom: 5rem;
+}
+.socials a:hover {
+    background-color: #0061cf;
+    color:white;
+    border-color: #0061cf;
+}
+footer {
+    position: relative;
+    height: 30vh;
+    background-color: #A1A6B4;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+footer a {
+    color: #0061cf;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+.bigcontainer {
+    margin-right: 70rem;
+}
+.bigcontainer a {
+    width: auto;
+    text-decoration: none;
+}
+.bigcontainer img {
+    height: 64px;
+    width: 64px;
+}
+.footer_websitecontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 8rem;
+}
+.footer_websitecontainer a {
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+.footer_websitecontainer h1 {
+    font-size: 1.3rem;
+    margin: 3rem 0 0.5rem 0;
+    font-weight: 500;
+    color: #121212;
+}
+.footer_followcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footer_followcontainer a {
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+.footer_followcontainer h1 {
+    font-size: 1.3rem;
+    margin: 3rem 0 0.5rem 0;
+    font-weight: 500;
+    color: #121212;
+}
