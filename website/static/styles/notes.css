@@ -1,0 +1,125 @@
+.Notes-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.Notes-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 9rem;
+}
+.Notes-header h1 {
+    font-size: 2rem;
+    margin-left: 3rem;
+}
+#AddNote {
+    font-size: 1.3rem;
+    margin: 0 0 0 2rem;
+    color: #0061cf;
+}
+#AddNote img {
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#AddNote:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.NotesList {
+    overflow-y: scroll;
+    height: 80vh;
+    max-height: 80vh;
+    margin-top: 2rem;
+    width: 90%;
+    align-self: center;
+}
+.NotesList ul {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 3rem;
+    list-style: none;
+    margin-top: 3rem;
+    color: white;
+    align-self: center;
+}
+.note-item {
+    width: 25rem;
+    padding: 1.5rem;
+    position: relative;
+    background-color: #080b23;
+}
+.NotesList::-webkit-scrollbar {
+    width: 10px;
+}
+.NotesList::-webkit-scrollbar-thumb {
+    background-color: #0061cf;
+    border-radius: 6px;
+}
+.NotesList::-webkit-scrollbar-thumb:hover {
+    background: #00abff;
+}
+#EditNoteBtn, #DeleteNoteBtn {
+    position: absolute;
+    background: none;
+    border: none;
+}
+#DeleteNoteBtn {
+    top: 1rem;
+    right: 1rem;
+}
+#EditNoteBtn {
+    top: 1rem;
+    left: 1rem;
+}
+.note-item h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.note-item p {
+    white-space: pre-wrap;
+}
+#EditNoteBtn:hover, #DeleteNoteBtn:hover {
+    cursor: pointer;
+}
+#addNoteForm, #editNoteForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#addNoteForm input, #editNoteForm input, #addNoteForm textarea, #editNoteForm textarea {
+    font-size: 1rem;
+    width: 80%;
+    padding-left: 0.5rem;
+}
+#addNoteForm textarea, #editNoteForm textarea  {
+    height: 5rem;
+}
+#addNoteForm label, #editNoteForm label {
+    width: 100%;
+    align-self: left;
+    margin: 1rem 0 1rem 3rem;
+}
+#addNoteForm button, #editNoteForm button {
+    background-color: #0061cf;
+    border: none;
+    width: 30%;
+    height: 4rem;
+    align-self: center;
+    border-radius: 25px;
+    margin-top: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 0 5px #0061cf;
+}
+#addNoteForm button:hover, #editNoteForm button:hover {
+    background-color: #00abff;
+    cursor: pointer;
+    box-shadow: none;
+}
+.no-notes {
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 3rem;
+}
