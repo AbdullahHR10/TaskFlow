@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}TaskFlow - Habit Tracker{% endblock %}
+{% block content %}
+
+<section class="HabitTracker-container">
+    <div class="HabitTracker-header">
+        <h1>Habit Tracker</h1>
+    </div>
+    <section class="section-dashboard">
+        <a id="AddHabit" class="btn"><img src="{{ url_for('static', filename='icons/plus.png') }}">Add Habit</a>
+    </section>
+    <section class="HabitsList">
+            <ul>
+                {% set habits = current_user.habits %}
+                {% for habit in habits %}
+                    <li class="habit-item">
+                        <h1 class="habit-name">{{ habit.name }}</h1>
+                        <div class="catedesp">
+                            <h2 class="habit-category"><span>Category: </span>{{ habit.category }}</h2>
+                            <h2 class="habit-frequency"><span>Frequency: </span>{{ habit.frequency }}</h2>
+                        </div>
+                        <p class="habit-description">{{ habit.description }}</p>
+                        <div class="strebtn">
+                            <p class="habit-streak">Streak: {{ habit.streak }} days</p>
+                            <form method="POST" action="{{ url_for('routes.reset_habit_streak') }}">
+                                <input type="hidden" name="habit_id" value="{{ habit.id }}">
+                                <button type="submit" class="reset-streak">Reset</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('routes.complete_habit') }}">
+                                <input type="hidden" name="habit_id" value="{{ habit.id }}">
+                                <button type="submit" class="complete-habit">Complete Habit</button>
+                            </form>
+                            <p class="startdate">Started on: {{ habit.created_at.strftime('%Y-%m-%d') }}</p>                        </div>
+                        <button id="EditHabitBtn" onclick="showEditHabitPopup(this)"
+                            data-habit-id="{{ habit.id }}"
+                            data-habit-name="{{ habit.name }}"
+                            data-habit-category="{{ habit.category }}"
+                            data-habit-description="{{ habit.description }}"
+                            data-habit-frequency="{{ habit.frequency }}">
+                            <img src="{{ url_for('static', filename='icons/edit.png') }}">
+                        </button>
+                        <form method="POST" action="{{ url_for('routes.delete_habit') }}">
+                            <input type="hidden" name="habit_id" value="{{ habit.id }}">
+                            <button id="DeleteHabitBtn" type="submit" class="btn"><img src="{{ url_for('static', filename='icons/delete.png')}}"></button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="no-habits">
+                        <h1>No habits found.</h1>
+                    </li>
+                    {% endfor %}
+            </ul>
+    </section>
+</section>
+<!-- Add Habit Popup -->
+<div id="habitFormPopup" class="popup-add-habit">
+    <div class="popup-content-add-habit">
+        <span id="closePopup" class="close">&times;</span>
+        <h2>Add Habit</h2>
+        <form id="addHabitForm" method="POST" action="{{ url_for('routes.add_habit') }}">
+            <label for="habit_name">Habit Name:</label>
+            <input type="text" id="habit_name" name="habit_name" required>
+            
+            <label for="habit_category">Category:</label>
+            <input type="text" id="habit_category" name="habit_category">
+            
+            <label for="habit_description">Description:</label>
+            <textarea id="habit_description" name="habit_description" required></textarea>
+            
+            <label for="habit_frequency">Frequency:</label>
+            <input type="text" id="habit_frequency" name="habit_frequency" required>
+            
+            <button type="submit" class="btn">Add Habit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Habit Popup -->
+<div id="editHabitPopup" class="popup-edit-habit">
+    <div class="popup-content-edit-habit">
+        <span id="closeEditPopup" class="close">&times;</span>
+        <h2>Edit Habit</h2>
+        <form id="editHabitForm" method="POST" action="{{ url_for('routes.edit_habit') }}">
+            <input type="hidden" id="edit_habit_id" name="habit_id">
+            
+            <label for="edit_habit_name">Habit Name:</label>
+            <input type="text" id="edit_habit_name" name="habit_name" required>
+            
+            <label for="edit_habit_category">Category:</label>
+            <input type="text" id="edit_habit_category" name="habit_category">
+            
+            <label for="edit_habit_description">Description:</label>
+            <textarea id="edit_habit_description" name="habit_description" required></textarea>
+            
+            <label for="edit_habit_frequency">Frequency:</label>
+            <input type="text" id="edit_habit_frequency" name="habit_frequency" required>
+            
+            <button type="submit" class="btn">Save Habit</button>
+        </form>
+    </div>
+</div>
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/habit_tracker.js') }}"></script>
+{% endblock %}
+
+{% endblock %}
