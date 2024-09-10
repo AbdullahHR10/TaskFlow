@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/landing_page.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <nav class="nav_bar">
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('routes.home') }}" id="Logo">
+                <img src="{{ url_for('static', filename='icons/TaskFlow_logo.png') }}">
+                <h3>TaskFlow</h3>
+            </a>
+        {% else %}
+            <a href="{{ url_for('routes.welcome') }}" id="Logo">
+                <img src="{{ url_for('static', filename='icons/TaskFlow_logo.png') }}">
+                <h3>TaskFlow</h3>
+            </a>
+        {% endif %}
+        <a href="{{ url_for('routes.home') }}">Home</a>
+        <a href="#FeaturesTitle">Features</a>
+        <a href="#About">About</a>
+        <a href="https://github.com/AbdullahHR10/TaskFlow" target="_blank">Source Code</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('auth.logout') }}" id="logoutbtn">Logout</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}" id="loginbtn">Log in</a>
+            <a href="{{ url_for('auth.sign_up') }}" id="signupbtn">Sign up</a>
+        {% endif %}
+    </nav>
+    <section class="description">
+        <h1>Welcome to TaskFlow</h1>
+        <h3>Maximize Your Potential with TaskFlow Effortlessly<br>Manage Your <span>Tasks, Habits,</span> and <span>Budget</span></h3>
+        <div class="btncontainer">
+            <a href="#FeaturesTitle" class="button">Features</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('routes.home') }}" class="button" id="GetStarted">Get Started</a>
+            {% else %}
+                <a href="{{ url_for('auth.sign_up') }}" class="button" id="GetStarted">Get Started</a>
+            {% endif %}
+        </div>
+    </section>
+    <h1 id="FeaturesTitle">Features</h1>
+    <section class="features">
+        <div class="ToDoList">
+            <div class="ToDoList-info">
+                <div class="ToDoList-description">
+                    <h3>To Do List<img src="{{ url_for('static', filename='icons/tasks.png') }}" alt="Icon" class="icon"></h3>
+                    <p>Organize and manage your daily tasks efficiently with our To Do List feature, Keep track of your goals and deadlines in one convenient place.</p>
+                </div>
+                <div class="imgcontainer">
+                    <img src="{{ url_for('static', filename='icons/LPTo-Do-List.png') }}">
+                </div>
+            </div>
+        <div class="Habits">
+            <div class="Habits-info">
+                <div class="imgcontainer">
+                    <img src="{{ url_for('static', filename='icons/LPHabit-Tracker.png') }}" alt="Icon" class="icon">
+                </div>
+                <div class="Habits-description">
+                    <h3><img src="{{ url_for('static', filename='icons/habits.png') }}" alt="Habits Icon">Habit Tracker</h3>
+                    <p>Build and maintain positive habits with our Habit Tracker, Monitor your progress and stay motivated as you work towards your personal growth objectives.</p>
+                </div>
+            </div>
+        <div class="Budget">
+            <div class="Budget-info">
+                <div class="Budget-description">
+                    <h3>Budget Tracker<img src="{{ url_for('static', filename='icons/budget.png') }}" alt="Budget Icon"></h3>
+                    <p>Manage your finances effectively with our Budget Tracker, Track your income and expenses, set financial goals, and gain insights to help you make informed financial decisions.</p>
+                </div>
+                <div class="imgcontainer">
+                    <img src="{{ url_for('static', filename='icons/LPBudget-Tracker.png') }}">
+                </div>
+            </div>
+        </div>
+        <div class="Notes">
+            <div class="Notes-info">
+                <div class="imgcontainer">
+                    <img src="{{ url_for('static', filename='icons/LPNotes.png') }}">
+                </div>
+                <div class="Notes-description">
+                    <h3><img src="{{ url_for('static', filename='icons/notes.png') }}" alt="Icon" class="icon">Notes</h3>
+                    <p>Take and store simple notes for quick reference, Keep your notes organized and easily accessible whenever you need them.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="About" id="About">
+        <h1 id="About-Title">About</h1>
+        <section class="Project-info">
+            <h1>TaskFlow</h1>
+            <p>TaskFlow is a project inspired by my need for better organization in life. I wanted a tool to track daily tasks, goals, and even manage my budget—all in one place. Balancing work, personal goals like going to the gym, and finances was a challenge, and TaskFlow became the solution.
+
+                While it started as a Portfolio Project for Holberton School, it quickly grew into something more personal. TaskFlow reflects both my technical growth and my journey to stay on top of life's demands.
+                
+                Explore TaskFlow and see how it can help organize your tasks, habits and finances!  </p>
+
+            <div class="source-code">
+                <a href="https://github.com/AbdullahHR10/TaskFlow" target="_blank">Source Code</a>
+            </div>
+            <div class="demo-container">
+                <h1>Demo</h1>
+                <iframe width="960" height="540" 
+                    src="https://www.youtube.com/embed/_54sPXuVyeo" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+            <section class="Team-info">
+                <h1>Developer</h1>
+                <h3>Abdullah Huseein</h3>
+                <p>I'm Abdullah Hussein, a passionate coding enthusiast and a current student at ALX. Coding has always been a significant part of my life, and I’m proud of working on TaskFlow. This project highlights my skills in creating functional and impactful tools.
+
+                    While I’m still in the process of developing my personal and professional goals, my dedication to coding and learning drives me to continually improve and explore new opportunities in technology.</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/profile.php?id=61557152731160" target="_blank"><i class='bx bxl-facebook'></i></a>
+                    <a href="https://github.com/AbdullahHR10" target="_blank"><i class='bx bxl-github'></i></a>
+                    <a href="mailto:AbdullahH.Ragab10@gmail.com"><i class='bx bxl-gmail'></i></a>
+                    <a href="https://x.com/AbdullahHR20" target="_blank"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.linkedin.com/in/abdullah-hussein-061039280/" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </section>
+    </section>
+    <footer>
+        <div class="bigcontainer">
+            <a href="landing_page.html" id="Logo">
+                <img src="{{ url_for('static', filename='icons/TaskFlow_logo.png') }}">
+                <h3>TaskFlow</h3>
+            </a>
+        </div>
+        <div class="footer_websitecontainer">
+            <h1>Website</h1>
+            <a href="#About">About</a>
+            <a href="https://github.com/AbdullahHR10/TaskFlow" target="_blank">Source Code</a>
+        </div>
+        <div class="footer_followcontainer">
+            <h1>Follow</h1>
+            <a href="https://www.linkedin.com/in/abdullah-hussein-061039280/" target="_blank">Linkedin</a>
+            <a href="https://github.com/AbdullahHR10" target="_blank">Github</a>
+            <a href="https://x.com/AbdullahHR20" target="_blank">Twitter</a>
+            <a href="https://www.youtube.com/@AbdullahHussein-fi2qk" target="_blank">Youtube</a>
+        </div>
+    </footer>
+</body>
+</html>
