@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TaskFlow{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/flash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/to_do_list.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/habit_tracker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/budget_tracker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/notes.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='icons/TaskFlow_logo.png') }}" type="image/x-icon">
+
+</head>
+<body>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <nav class="nav_bar">
+        <a href="{{ url_for('routes.welcome') }}" id="Logo">
+            <img id="Logoimg" src="{{ url_for('static', filename='icons/TaskFlow_logo.png') }}">
+            <h3>TaskFlow</h3>
+        </a>
+        <a href="{{ url_for('routes.home') }}">Home</a>
+        <a href="{{ url_for('routes.welcome')}}#About">About</a>
+        <a href="https://github.com/AbdullahHR10/TaskFlow" target="_blank">Source Code</a>
+    </nav>
+
+    <section class="container">
+        <section class="side_bar">
+            <h1 id="Profiletitle">Profile</h1>
+            <div class="side_bar-profile-container">
+                <img src="{{ url_for('static', filename='icons/profile.png') }}">
+               <h3>{{ current_user.username }}</h3>
+            </div>
+            <h1 id="Navigationtitle">Navigation</h1>
+            <div class="side_bar-navigation-container">
+                <a href="{{ url_for('routes.to_do_list')}}">To Do List<img src="{{ url_for('static', filename='icons/tasks.png') }}"></a>
+                <a href="{{ url_for('routes.habit_tracker')}}">Habit Tracker<img src="{{ url_for('static', filename='icons/habits.png') }}"></a>
+                <a href="{{ url_for('routes.budget_tracker')}}">Budget Tracker<img src="{{ url_for('static', filename='icons/budget.png') }}"></a>
+                <a href="{{ url_for('routes.notes')}}">Notes<img src="{{ url_for('static', filename='icons/notes.png') }}"></a>
+            </div>
+            <h1 id="Dashboardtitle">Settings</h1>
+            <div class="side_bar-dashboard-container">
+                <a href="#" id="themeButton">
+                    <img src="{{ url_for('static', filename='icons/theme.png') }}" alt="Theme">Theme
+                  </a>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" id="logoutBtn"><img src="{{ url_for('static', filename='icons/logout.png') }}">Logout</a>
+        </section>
+        {% block content %}{% endblock %}
+    </section>
+    <div id="themePopup" class="popup">
+        <div class="popup-content">
+        <span id="closePopup" class="close">&times;</span>
+        <h2 id="theme-title">Select a Theme</h2>
+        <div class="theme-options">
+            <div class="light-themes">
+                <h3>Light</h3>
+                <button class="theme-option" data-theme="light">Light<img src="{{ url_for('static', filename='icons/light.png') }}"></button>
+            </div>
+            <div class="colored-themes">
+                <h3>Colored</h3>
+                <button class="theme-option" data-theme="blue">Blue<img src="{{ url_for('static', filename='icons/blue.png') }}"></button>
+                <button class="theme-option" data-theme="red">Red<img src="{{ url_for('static', filename='icons/red.png') }}"></button>
+                <button class="theme-option" data-theme="lime">Lime<img src="{{ url_for('static', filename='icons/lime.png') }}"></button>
+            </div>
+            <div class="dark-themes">
+                <h3>Dark</h3>
+                <button class="theme-option" data-theme="default">Default<img src="../static/icons/default.png"></button>
+                <button class="theme-option" data-theme="dark">Dark<img src="{{ url_for('static', filename='icons/dark.png') }}"></button>
+                <button class="theme-option" data-theme="black">Black<img src="{{ url_for('static', filename='icons/black.png') }}"></button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts/flash.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/themes.js') }}"></script>  
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
