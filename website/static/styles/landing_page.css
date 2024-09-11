@@ -319,3 +319,11 @@ footer a:hover {
     font-weight: 500;
     color: #121212;
 }
+#Copyright {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    color: #333333;
+}
