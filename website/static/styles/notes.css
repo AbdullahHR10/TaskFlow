@@ -76,6 +76,9 @@
     text-align: center;
     font-size: 2rem;
     margin: 2rem 0 1rem 0;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 .note-item p {
     white-space: normal;
