@@ -47,11 +47,15 @@ def sign_up():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
+        user_by_email = User.query.filter_by(email=email).first()
+
         user = User.query.filter_by(username=username).first()
         if user:
             flash('Username already exists.', category='error')
         elif len(username) < 3:
             flash("Username must be at least 3 characters.", 'error')
+        elif user_by_email:
+            flash('Email is already in use.', category='error')
         elif len(password) < 6:
             flash("Password must be at least 6 characters.", 'error')
         elif confirm_password != password:
