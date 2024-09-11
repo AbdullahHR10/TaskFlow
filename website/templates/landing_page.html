@@ -122,7 +122,6 @@
                 <div class="socials">
                     <a href="https://www.facebook.com/profile.php?id=61557152731160" target="_blank"><i class='bx bxl-facebook'></i></a>
                     <a href="https://github.com/AbdullahHR10" target="_blank"><i class='bx bxl-github'></i></a>
-                    <a href="mailto:AbdullahH.Ragab10@gmail.com"><i class='bx bxl-gmail'></i></a>
                     <a href="https://x.com/AbdullahHR20" target="_blank"><i class='bx bxl-twitter'></i></a>
                     <a href="https://www.linkedin.com/in/abdullah-hussein-061039280/" target="_blank"><i class='bx bxl-linkedin'></i></a>
                 </div>
@@ -130,7 +129,7 @@
     </section>
     <footer>
         <div class="bigcontainer">
-            <a href="landing_page.html" id="Logo">
+            <a href="{{ url_for ('routes.welcome') }}" id="Logo">
                 <img src="{{ url_for('static', filename='icons/TaskFlow_logo.png') }}">
                 <h3>TaskFlow</h3>
             </a>
