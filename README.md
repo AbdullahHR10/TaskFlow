@@ -8,20 +8,33 @@ This project was developed as the final project of the ALX (Holberton School) fo
 
 ---
 
-# Features
+# 📑 Table of Contents
+
+- [Features](#features)
+- [Additional Highlights](#additional-highlights)
+- [Future Enhancements](#future-enhancements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Developer](#developer)
+- [License](#license)
+
+---
+
+# ✨ Features
 
 - #### **✔ To-Do-List:** Create, edit, and delete tasks. Assign due dates to stay on top of your responsibilities.
 - #### **🔄 Habit Tracker:** Monitor habits with daily check-ins and visualize progress to develop consistency.
 - #### **💰 Budget Tracker:** Record purchases, sales, and categorize expenses. Easily track your financial progress.
 - #### **📝 Notes:** Write notes for thoughts, reflections, or reminders, keeping everything organized in one place.
 
-# Additional Highlights
+# 🔍 Additional Highlights
 
 - #### **🎨 Themes:** Customize the interface to your liking with multiple theme options.
 - #### **📂 Sidebar Navigation:** Simple and intuitive navigation through the application using a sidebar menu.
 - #### **🏠 Landing Page:** Welcomes users with a personalized message and demo video after logging in.
 
-# Future Enhancements
+# 🚀 Future Enhancements
 
 - #### **🎨 Additional Themes:** Introduce new theme options for further customization of the user interface.
 - #### **🌐 Responsive Design:** Improve compatibility with various screen sizes and devices.
@@ -29,7 +42,7 @@ This project was developed as the final project of the ALX (Holberton School) fo
 
 ---
 
-# Installation
+# ⚙️ Installation
 
 To get started with TaskFlow, follow these steps:
 
@@ -69,14 +82,14 @@ The application will be available at `http://localhost:5000` by default.
 
 ---
 
-# Usage
+# 🎥 Usage
 For a quick overview of how to use TaskFlow, watch the demo video below:
 
 https://youtu.be/_54sPXuVyeo?si=nX9P09atjKgvECjJ
 
 ---
 
-# Technologies Used
+# 💻 Technologies Used
 
 ### Languages
 
@@ -101,7 +114,7 @@ https://youtu.be/_54sPXuVyeo?si=nX9P09atjKgvECjJ
 
 ---
 
-# Developer
+# 👨‍💻 Developer
 ### **Abdullah Hussein**
 
 I'm Abdullah Hussein, a passionate coding enthusiast and a current student at ALX. Coding has always been a significant part of my life, and I’m proud of working on TaskFlow. This project highlights my skills in creating functional and impactful tools. While I’m still in the process of developing my personal and professional goals, my dedication to coding and learning drives me to continually improve and explore new opportunities in technology. 
@@ -109,3 +122,8 @@ I'm Abdullah Hussein, a passionate coding enthusiast and a current student at AL
 - Email: [AbdullahH.Ragab10@gmail.com](mailto:AbdullahH.Ragab10@gmail.com)
 - LinkedIn: [Abdullah Hussein](https://www.linkedin.com/in/abdullah-hussein-061039280/)
 - Twitter: [Abdullah Hussein](https://x.com/AbdullahHR20)
+
+---
+
+# 📄 License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
