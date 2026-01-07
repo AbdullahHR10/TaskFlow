@@ -22,7 +22,7 @@ const colorMap: Record<ButtonColor, string> = {
 const baseClass = [
   'px-4 py-2.5',
   'flex items-center justify-center gap-2',
-  'rounded-md',
+  'rounded-md cursor-pointer',
   'font-medium text-sm',
   'shadow-xs hover:shadow-none',
   'duration-200 ease-in-out'
