@@ -3,11 +3,12 @@ import logoBlack from "@/assets/logo-black.svg";
 
 interface LogoProps {
   size?: number;
+  text?: boolean;
   textSize?: number;
   stacked?: boolean;
 }
 
-const Logo = ({ size = 3, textSize, stacked }: LogoProps) => {
+const Logo = ({ size = 3, text = true, textSize, stacked }: LogoProps) => {
   return (
     <div className={`flex items-center gap-2 ${stacked ? "flex-col" : "flex-row"}`}>
       <img
@@ -22,12 +23,14 @@ const Logo = ({ size = 3, textSize, stacked }: LogoProps) => {
         style={{ height: `${size}rem`, width: `${size}rem` }}
         alt="TaskFlow logo (light mode)"
       />
-      <h1
-        className="font-bold leading-9"
-        style={{ fontSize: textSize ? `${textSize}rem` : undefined }}
-      >
-        TaskFlow
-      </h1>
+      {text && (
+        <h1
+          className="font-bold leading-9"
+          style={{ fontSize: textSize ? `${textSize}rem` : undefined }}
+        >
+          TaskFlow
+        </h1>
+      )}
     </div>
   );
 };
