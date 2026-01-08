@@ -1,4 +1,4 @@
-import GridPattern from "../GridPattern";
+import GridPattern from "@/components/GridPattern";
 import type { ReactNode } from "react";
 
 type CenteredLayoutProps = {

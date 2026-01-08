@@ -1,7 +1,7 @@
-import Button from "../../components/ui/Button";
-import CenteredLayout from "../../components/layouts/CenteredLayout";
-import usePageTitle from "../../hooks/usePageTitle";
-import { ERRORS } from "./errors.config";
+import Button from "@/components/ui/Button";
+import CenteredLayout from "@/components/layouts/CenteredLayout";
+import usePageTitle from "@/hooks/usePageTitle";
+import { ERRORS } from "@/pages/errors/errors.config";
 import { FaArrowLeft } from "react-icons/fa";
 
 type ErrorCode = keyof typeof ERRORS;

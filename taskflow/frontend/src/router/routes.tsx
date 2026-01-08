@@ -1,4 +1,4 @@
-import ErrorPage from "../pages/errors/ErrorPage";
+import ErrorPage from "@/pages/errors/ErrorPage";
 
 export const routes = [
   { path: "/401", element: <ErrorPage code={401} /> },
