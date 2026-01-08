@@ -13,10 +13,6 @@ export interface SignupPayLoad {
   confirm_password: string;
 }
 
-export interface AuthUserResponse {
-  user: User;
-}
-
 export interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
