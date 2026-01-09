@@ -10,7 +10,7 @@ export interface SignupPayLoad {
   name: string;
   email: string;
   password: string;
-  confirm_password: string;
+  confirmPassword: string;
 }
 
 export interface AuthState {
