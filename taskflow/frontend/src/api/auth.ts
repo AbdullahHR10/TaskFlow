@@ -6,9 +6,13 @@ const AUTH_API_URL = "/api/v1/auth"
 
 export const authApi = {
   signup: async (data: SignupPayLoad): Promise<void> => {
+    const { confirmPassword, ...rest } = data
     await apiFetch(`${AUTH_API_URL}/signup`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...rest,
+        confirm_password: confirmPassword
+      }),
     });
   },
 
