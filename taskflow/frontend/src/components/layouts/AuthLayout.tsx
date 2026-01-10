@@ -19,7 +19,7 @@ const AuthLayout = ({ title, subtitle, children, switchAuth, legal }: AuthLayout
           <div className="flex flex-col items-center">
             <Logo text={false} size={4} stacked={true} />
             <h1 className="text-2xl font-bold mt-2">{title}</h1>
-            <p className="text-gray-700 text-sm mb-6">{subtitle}</p>
+            <p className="text-muted text-sm mb-6">{subtitle}</p>
           </div>
 
             {children}
@@ -28,7 +28,7 @@ const AuthLayout = ({ title, subtitle, children, switchAuth, legal }: AuthLayout
       </div>
 
       {legal && (
-        <div className="text-center text-xs text-gray-500">
+        <div className="text-center text-xs text-muted">
           {legal}
         </div>
       )}
