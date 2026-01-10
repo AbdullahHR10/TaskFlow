@@ -1,41 +1,41 @@
 import type { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 
-type ButtonColor = 'white' | 'black';
+type ButtonVariant = "primary" | "secondary";
 
 type ButtonProps = {
   text: string;
-  color: ButtonColor;
+  variant?: ButtonVariant;
   className?: string;
   icon?: ReactElement
   onClick?: () => void;
   link?: string;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   disabled?: boolean
 }
 
-const colorMap: Record<ButtonColor, string> = {
-  white: 'bg-white text-black shadow-[#FFF]',
-  black: 'bg-black text-white shadow-[#000] hover:bg-gray-900'
-}
-
 const baseClass = [
-  'px-4 py-2.5',
-  'flex items-center justify-center gap-2',
-  'rounded-md cursor-pointer',
-  'font-medium text-sm',
-  'shadow-xs hover:shadow-none',
-  'duration-200 ease-in-out'
-].join(' ');
+  "px-4 py-2.5",
+  "flex items-center justify-center gap-2",
+  "rounded-md cursor-pointer",
+  "font-medium text-sm",
+  "transition-all duration-200",
+  "focus:ring-2 ring-input",
+].join(" ");
+
+const variantMap: Record<ButtonVariant, string> = {
+  primary: "bg-primary text-primary-foreground hover:opacity-90",
+  secondary: "bg-card text-foreground border border-divider hover:bg-muted/10",
+};
 
 const Button = ({
   text,
-  color,
-  className = '',
+  variant = "primary",
+  className = "",
   icon,
   onClick,
   link,
-  type = 'button',
+  type = "button",
   disabled
 }: ButtonProps) => {
   const navigate = useNavigate();
@@ -57,12 +57,12 @@ const Button = ({
       disabled={disabled}
       className={[
         baseClass,
-        colorMap[color],
+        variantMap[variant],
         disabled
-        ? 'opacity-50 cursor-not-allowed'
-        : 'hover:shadow-none',
+        ? "opacity-50 cursor-not-allowed"
+        : "",
         className
-      ].join(' ')}
+      ].join(" ")}
       onClick={handleClick}
     >
       {icon}
