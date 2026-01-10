@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes } from "react"
 
-const labelBase = "flex items-center gap-3 cursor-pointer text-sm font-medium text-gray-700"
+const labelBase = "flex items-center gap-3 cursor-pointer text-sm font-medium text-muted"
 
 interface CheckboxProps
   extends InputHTMLAttributes<HTMLInputElement> {

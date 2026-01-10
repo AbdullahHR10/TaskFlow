@@ -1,14 +1,14 @@
 import type { ReactElement, InputHTMLAttributes } from "react";
 
-const inputBase = 
-  "h-10 w-full bg-gray-100 placeholder-gray-500 text-sm border \
-  border-gray-400 px-8 border-border rounded-md focus:outline-gray-400"
+const inputBase =
+  "h-10 w-full bg-input text-foreground text-sm px-8 rounded-md \
+  border border-input focus:border-[rgb(var(--input-focus))] focus:outline-none"
 
-const inputError = "border-red-500 focus:ring-red-500"
+const inputError = "border-danger focus:ring-red-500"
 
 const labalBase = "text-sm font-semibold"
 
-const iconBase = "absolute top-1/2 left-2 -translate-y-1/2 text-gray-800"
+const iconBase = "absolute top-1/2 left-2 -translate-y-1/2 text-icon"
 
 const errorText = "text-sm text-red-500"
 
