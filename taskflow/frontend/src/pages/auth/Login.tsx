@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useAuth } from "@/context/AuthContext"
+import { useApiErrors } from "@/hooks/useApiErrors";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
@@ -13,10 +14,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { errors, handleError, clearErrors } = useApiErrors();
 
   const switchAuth = (
-    <p className="text-sm text-center mt-4 text-gray-700">
+    <p className="text-sm text-center mt-4 text-muted">
       Don&apos;t have an account?{" "}
       <a href="/signup" className="font-semibold cursor-pointer text-blue-500 hover:underline">
         Sign up
@@ -26,12 +27,12 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError(null);
+    clearErrors();
 
     try {
       await login({ email, password, remember });
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Login failed");
+    } catch (err) {
+      handleError(err);
     }
   };
 
@@ -42,11 +43,18 @@ const Login = () => {
       switchAuth={switchAuth}
     >
       <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
-        {error && (
-          <p className="text-sm text-red-500 flex items-center gap-2">
-            <span><MdError size={16} /></span>
-            {error}
-          </p>
+        {errors.length > 0 && (
+          <div className="space-y-2">
+            {errors.map((error, i) => (
+              <p
+                key={i}
+                className="text-sm text-red-500 flex items-center gap-2"
+              >
+                <span><MdError size={16} /></span>
+                {error}
+              </p>
+            ))}
+          </div>
         )}
 
         <Input
@@ -78,7 +86,7 @@ const Login = () => {
         />
 
         <Button
-          color="black"
+          variant="primary"
           type="submit"
           text="Log in"
           disabled={isLoading}

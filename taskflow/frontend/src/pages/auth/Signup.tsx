@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { useApiErrors } from "@/hooks/useApiErrors";
 import { useAuth } from "@/context/AuthContext"
 import AuthLayout from "@/components/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
@@ -8,17 +9,16 @@ import { IoPersonOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 import { CiMail, CiLock } from "react-icons/ci";
 
-
 const Signup = () => {
   const { signup, isLoading } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const { errors, handleError, clearErrors } = useApiErrors();
 
   const switchAuth = (
-    <p className="text-sm text-center mt-4 text-gray-700">
+    <p className="text-sm text-center mt-4 text-muted">
       Already have an account?{" "}
       <a href="/login" className="font-semibold cursor-pointer text-blue-500 hover:underline">
         Log in
@@ -27,21 +27,32 @@ const Signup = () => {
   );
 
   const legal = (
-    <p className="text-xs text-gray-500 mt-4 text-center">
-      By signing up, you agree to our 
-      <a href="/privacy-policy" className="font-semibold text-blue-500 hover:underline">Privacy Policy</a> 
-      and <a href="/terms-of-service" className="font-semibold text-blue-500 hover:underline">Terms of Service</a>.
+    <p className="text-xs text-muted mt-4 text-center">
+      By signing up, you agree to our
+      <a
+        href="/privacy-policy"
+        className="font-semibold text-blue-500 hover:underline"
+      >
+        {" "}Privacy Policy{" "}
+      </a>
+      and
+      <a
+        href="/terms-of-service"
+        className="font-semibold text-blue-500 hover:underline"
+      >
+        {" "}Terms of Service
+      </a>.
     </p>
   );
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError(null);
+    clearErrors();
 
     try {
       await signup({ name, email, password, confirmPassword })
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Sign up failed");
+    } catch (err) {
+      handleError(err);
     }
   };
 
@@ -53,11 +64,18 @@ const Signup = () => {
       legal={legal}
     >
       <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
-        {error && (
-          <p className="text-sm text-red-500 flex items-center gap-2">
-            <span><MdError size={16} /></span>
-            {error}
-          </p>
+        {errors.length > 0 && (
+          <div className="space-y-2">
+            {errors.map((error, i) => (
+              <p
+                key={i}
+                className="text-sm text-red-500 flex items-center gap-2"
+              >
+                <span><MdError size={16} /></span>
+                {error}
+              </p>
+            ))}
+          </div>
         )}
 
         <Input
@@ -66,6 +84,7 @@ const Signup = () => {
           type="text"
           icon={<IoPersonOutline />}
           placeholder="John Doe"
+          value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
@@ -102,7 +121,7 @@ const Signup = () => {
         />
 
         <Button
-          color="black"
+          variant="primary"
           type="submit"
           text="Sign up"
           disabled={isLoading}
