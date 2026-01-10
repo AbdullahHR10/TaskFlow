@@ -3,3 +3,9 @@ export interface ApiResponse<T = unknown> {
   message?: string;
   data?: T;
 }
+
+export type ApiError = {
+  status: number;
+  message: string;
+  data?: Record<string, string[]>;
+};
