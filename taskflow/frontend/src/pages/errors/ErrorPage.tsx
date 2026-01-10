@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 import CenteredLayout from "@/components/layouts/CenteredLayout";
-import usePageTitle from "@/hooks/usePageTitle";
+import { usePageTitle } from "@/hooks/usePageTitle";
 import { ERRORS } from "@/pages/errors/errors.config";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -14,8 +14,8 @@ const ErrorPage = ({ code }: { code: ErrorCode }) => {
 
   return (
     <CenteredLayout>
-      <div className="bg-gray-200 rounded-full p-6 mb-6">
-        <Icon className="h-12 w-12 text-gray-700" />
+      <div className="bg-icon rounded-full p-6 mb-6">
+        <Icon className="h-12 w-12 text-icon" />
       </div>
 
       <h1 className="text-4xl font-bold tracking-tight mb-2">
@@ -28,7 +28,7 @@ const ErrorPage = ({ code }: { code: ErrorCode }) => {
 
       <Button
         text="Back Home"
-        color="black"
+        variant="primary"
         icon={<FaArrowLeft className="h-3 w-3" />}
         link="/"
       />
