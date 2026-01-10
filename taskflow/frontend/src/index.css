@@ -97,6 +97,10 @@
     border: 1px solid rgb(var(--border));
   }
 
+  .border-divider-b {
+    border-bottom: 1px solid rgb(var(--border));
+  }
+
   .bg-primary {
     background-color: rgb(var(--primary));
   }
