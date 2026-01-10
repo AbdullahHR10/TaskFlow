@@ -1,4 +1,4 @@
-import type { ApiResponse } from "@/types/api";
+import type { ApiResponse, ApiError } from "@/types/api";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:5000";
 let csrfToken: string | null = null;
@@ -54,10 +54,13 @@ export async function apiFetch<T> (
   const data = await res.json()
 
   if (!res.ok) {
-    throw {
+    const apiError: ApiError = {
       status: res.status,
-      message: data?.message ?? "Something went wrong"
+      message: data?.message ?? "Something went wrong",
+      data: data?.data?? null,
     };
+
+    throw apiError;
   }
 
   return data;
