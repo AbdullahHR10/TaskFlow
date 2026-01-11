@@ -1,5 +1,5 @@
 import { apiFetch } from "../../../api/client";
-import type { LoginPayLoad, SignupPayLoad } from "@/types/auth";
+import type { SignupPayLoad, LoginPayLoad } from "@/features/auth/types/payloads";
 import type { User } from "@/types/user";
 
 const AUTH_API_URL = "/api/v1/auth"
