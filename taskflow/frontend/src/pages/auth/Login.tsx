@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/features/auth/context/AuthContext"
 import { useApiErrors } from "@/hooks/useApiErrors";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
