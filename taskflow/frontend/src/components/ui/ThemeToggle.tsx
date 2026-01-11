@@ -16,7 +16,7 @@ const ThemeToggle = () => {
     <button
       onClick={handleToggle}
       aria-label="Toggle theme"
-      className="p-2 rounded-lg hover:bg-muted transition outline-0 cursor-pointer"
+      className="p-2 rounded-full hover:bg-[rgb(var(--icon-bg))] transition outline-0 cursor-pointer"
     >
       {isDark ? <FaSun size={18} /> : <FaMoon size={18} />}
     </button>
