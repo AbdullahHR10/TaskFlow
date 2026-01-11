@@ -97,8 +97,20 @@
     border: 1px solid rgb(var(--border));
   }
 
+  .border-divider-t {
+    border-top: 1px solid rgb(var(--border));
+  }
+
   .border-divider-b {
     border-bottom: 1px solid rgb(var(--border));
+  }
+
+  .border-divider-r {
+    border-right: 1px solid rgb(var(--border));
+  }
+
+  .border-divider-l {
+    border-left: 1px solid rgb(var(--border));
   }
 
   .bg-primary {
