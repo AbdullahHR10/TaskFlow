@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import type { AuthContextValue, LoginPayLoad, SignupPayLoad } from "@/types/auth";
+import type { AuthContextValue } from "@/features/auth/types/context";
+import type { LoginPayLoad, SignupPayLoad } from "@/features/auth/types/payloads";
 import type { User } from "@/types/user";
-import { authApi } from "@/api/auth";
+import { authApi } from "@/features/auth/api/auth";
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 

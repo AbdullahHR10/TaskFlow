@@ -1,4 +1,4 @@
-import { apiFetch } from "./client";
+import { apiFetch } from "../../../api/client";
 import type { LoginPayLoad, SignupPayLoad } from "@/types/auth";
 import type { User } from "@/types/user";
 
