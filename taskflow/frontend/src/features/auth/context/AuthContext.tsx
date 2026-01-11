@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import type { AuthContextValue } from "@/features/auth/types/context";
-import type { LoginPayLoad, SignupPayLoad } from "@/features/auth/types/payloads";
+import type { LoginPayload, SignupPayload } from "@/features/auth/types/payloads";
 import type { User } from "@/types/user";
 import { authApi } from "@/features/auth/api/auth";
 
@@ -22,12 +22,12 @@ export function AuthProvider({ children }: { children: ReactNode}) {
     }
   };
 
-  const login = async(data: LoginPayLoad) => {
+  const login = async(data: LoginPayload) => {
     await authApi.login(data);
     await refreshUser();
   };
 
-  const signup = async (data: SignupPayLoad) => {
+  const signup = async (data: SignupPayload) => {
     await authApi.signup(data);
     await refreshUser();
   };
