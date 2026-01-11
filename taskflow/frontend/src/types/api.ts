@@ -9,3 +9,12 @@ export type ApiError = {
   message: string;
   data?: Record<string, string[]>;
 };
+
+export interface PaginatedData<T> {
+  items: T[];
+  total: number;
+  page: number;
+  page_size: number;
+}
+
+export type PaginatedResponse<T> = ApiResponse<PaginatedData<T>>;
