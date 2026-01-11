@@ -1,5 +1,5 @@
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/features/auth/context/AuthContext";
 import { FiLogOut } from "react-icons/fi";
 
 const SidebarUser = () => {
