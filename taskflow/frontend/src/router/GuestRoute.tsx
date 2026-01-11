@@ -1,20 +1,15 @@
-import type { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import FullPageSpinner from "@/components/ui/FullPageSpinner";
 
-interface GuestRouteProps {
-  children: ReactNode;
-}
-
-const GuestRoute = ({ children }: GuestRouteProps ) => {
+const GuestRoute = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) return <FullPageSpinner />;
 
-  if (isAuthenticated) return <Navigate to="/" replace />;
+  if (isAuthenticated) return <Navigate to="/app" replace />;
 
-  return <>{children}</>
+  return <Outlet />
 };
 
 export default GuestRoute;
