@@ -73,7 +73,7 @@ class BaseModel(Base, db.Model):
                 elif isinstance(value, date):
                     value = value.strftime('%Y-%m-%d')
                 elif isinstance(value, Enum):
-                    value = value.name
+                    value = value.value
                 dict_rep[key] = value
         return dict_rep
 
