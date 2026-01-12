@@ -1,31 +1,42 @@
 export const Priority = {
-  LOW: "LOW",
-  MEDIUM: "MEDIUM",
-  HIGH: "HIGH",
+  LOW: "Low",
+  MEDIUM: "Medium",
+  HIGH: "High",
+  CRITICAL: "Critical",
 } as const;
 
-export type Priority = typeof Priority[keyof typeof Priority];
+export type Priority =
+  typeof Priority[keyof typeof Priority];
 
 export const Category = {
-  WORK: "WORK",
-  PERSONAL: "PERSONAL",
-  HEALTH: "HEALTH",
+  WORK: "Work",
+  PERSONAL: "Personal",
+  STUDY: "Study",
+  HEALTH: "Health",
+  HOBBY: "Hobby",
+  OTHER: "Other",
 } as const;
 
-export type Category = typeof Category[keyof typeof Category];
+export type Category =
+  typeof Category[keyof typeof Category];
 
 export const Frequency = {
-  DAILY: "DAILY",
-  WEEKLY: "WEEKLY",
-  MONTHLY: "MONTHLY",
+  DAILY: "Daily",
+  WEEKLY: "Weekly",
+  MONTHLY: "Monthly",
 } as const;
 
-export type Frequency = typeof Frequency[keyof typeof Frequency];
+export type Frequency =
+  typeof Frequency[keyof typeof Frequency];
 
 export const BackgroundColor = {
-  RED: "RED",
-  BLUE: "BLUE",
-  GREEN: "GREEN",
+  BLUE: "Blue",
+  RED: "Red",
+  GREEN: "Green",
+  CYAN: "Cyan",
+  YELLOW: "Yellow",
+  ORANGE: "Orange",
+  PURPLE: "Purple",
 } as const;
 
 export type BackgroundColor =
