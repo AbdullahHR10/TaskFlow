@@ -13,8 +13,9 @@ export type ApiError = {
 export interface PaginatedData<T> {
   items: T[];
   total: number;
-  page: number;
-  page_size: number;
+  pages: number;
+  current_page: number;
+  per_page: number;
 }
 
 export type PaginatedResponse<T> = ApiResponse<PaginatedData<T>>;
