@@ -1,11 +1,11 @@
 import { apiFetch } from "../../../api/client";
-import type { SignupPayLoad, LoginPayLoad } from "@/features/auth/types/payloads";
+import type { SignupPayload, LoginPayload } from "@/features/auth/types/payloads";
 import type { User } from "@/types/user";
 
 const AUTH_API_URL = "/api/v1/auth"
 
 export const authApi = {
-  signup: async (data: SignupPayLoad): Promise<void> => {
+  signup: async (data: SignupPayload): Promise<void> => {
     const { confirmPassword, ...rest } = data
     await apiFetch(`${AUTH_API_URL}/signup`, {
       method: "POST",
@@ -16,7 +16,7 @@ export const authApi = {
     });
   },
 
-  login: async (data: LoginPayLoad): Promise<void> => {
+  login: async (data: LoginPayload): Promise<void> => {
     await apiFetch(`${AUTH_API_URL}/login`, {
       method: "POST",
       body: JSON.stringify(data),
