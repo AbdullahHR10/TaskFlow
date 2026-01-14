@@ -6,6 +6,7 @@ import Login from "@/pages/auth/Login";
 import Signup from "@/pages/auth/Signup";
 import AppLayout from "@/components/layouts/AppLayout";
 import Tasks from "@/pages/app/Tasks";
+import Notes from "@/pages/app/Notes";
 import { Navigate } from "react-router-dom";
 import Dashboard from "@/pages/app/Dashboard";
 import PrivacyPolicy from "@/pages/legal/PrivacyPolicy";
@@ -43,6 +44,7 @@ export const routes = [
           { index: true, element: <Navigate to="dashboard" replace /> },
           { path: "dashboard", element: <Dashboard />},
           { path: "tasks", element: <Tasks /> },
+          { path: "notes", element: <Notes />}
         ],
       },
     ],
