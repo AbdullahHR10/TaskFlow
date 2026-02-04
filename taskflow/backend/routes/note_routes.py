@@ -29,7 +29,7 @@ NOTE_KEYS = ["title", "content", "background_color"]
 
 @note_bp.route("/", methods=["GET"])
 @swag_from(doc_path("note/get_notes.yml"))
-@limiter.limit("20 per minute")
+@limiter.limit("120 per minute")
 @login_required
 def get_notes():
     """Gets paginated notes for the current user."""
@@ -88,7 +88,7 @@ def edit_note(note):
 
 @note_bp.route("/<string:note_id>", methods=["DELETE"])
 @swag_from(doc_path("note/delete_note.yml"))
-@limiter.limit("5 per minute")
+@limiter.limit("20 per minute")
 @login_required
 @ownership_required(Note)
 def delete_note(note):
