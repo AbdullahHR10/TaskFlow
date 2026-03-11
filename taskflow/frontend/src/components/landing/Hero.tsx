@@ -16,10 +16,12 @@ const Hero = () => {
             text="Get Started"
             variant="secondary"
             icon={<FaArrowRight />}
+            link="/signup"
           />
           <Button
             text="Learn More"
             variant="primary"
+            link="#features"
           />
         </div>
       </div>
