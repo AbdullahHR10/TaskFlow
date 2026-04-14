@@ -121,12 +121,17 @@ def edit_object(
     if schema:
         from marshmallow import ValidationError
         try:
-            schema.load(data, partial=True)
+            data = schema.load(data, partial=True)
         except ValidationError as e:
             abort(400, {"status": "error",
                         "message": "Validation failed", "data": e.messages})
 
     data = sanitize_input(data, keys)
+
+    if hasattr(obj, "completed") and obj.completed:
+        abort(400, {"status": "error",
+                    "message": "can't edit a completed instance"})
+
     for key in keys:
         if key in data:
             setattr(obj, key, data[key])
