@@ -129,10 +129,13 @@ def edit_object(
     data = sanitize_input(data, keys)
 
     if hasattr(obj, "completed") and obj.completed:
-        abort(400, {"status": "error",
-                    "message": "can't edit a completed instance"})
+        abort(400, {
+            "status": "error",
+            "message": "can't edit a completed instance"
+        })
 
-    for key in keys:
-        if key in data:
-            setattr(obj, key, data[key])
+    for key, value in data.items():
+        if hasattr(obj, key):
+            setattr(obj, key, value)
+
     return obj
