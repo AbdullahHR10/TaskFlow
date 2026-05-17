@@ -21,7 +21,7 @@ export const notesApi = {
    *
    * @param page Page number.
    * @param perPage Number of items per page.
-   * @returns 
+   * @returns Paginated response containing notes.
    */
   getAll: async (
     page = 1,
