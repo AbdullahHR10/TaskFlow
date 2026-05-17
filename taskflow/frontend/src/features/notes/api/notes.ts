@@ -36,7 +36,7 @@ export const notesApi = {
     }>(`${NOTES_API_URL}`, {
       params: {
         page,
-        perPage: perPage,
+        per_page: perPage,
       },
     });
 
